@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script type="text/javascript" src="scripts/mainpage.js">;</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">;</script>
+<title id="pageTitle">Insert title here</title>
+<script>
+function loadPage(){
+	purchaseproduct('/GroupProject/Ecomm?purchaseproduct=true');
+	loadReviews('/GroupProject/Ecomm?printReviews=true');
+}
+</script>
+</head>
+<body onLoad="loadPage();">
+	<nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="javascript:history.go(-1)">Back To Store</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+            </div>
+        </nav>
+
+	<h1 id="itemTitle">Title Here</h1>
+	<h2 id="itemBrand">Brand</h2>
+	<p id="itemDesc">Description</p>
+	<h3 id="price">Price</h3>
+	<p id="quantity"></p>
+	<input type="number" step="1" value=1 id="amount" name="numProducts"></input>
+	<BR />
+	<br>
+	<button class="btn btn-outline-secondary"
+		onClick="addtoCart('/GroupProject/Ecomm?addToCart=true');">Add
+		To cart</button>
+	<br>
+
+	<div class="input-group mb-3">
+		<input type="text" class="form-control" placeholder="Review"
+			aria-label="Review" aria-describedby="button-addon2" id="reviewInput">
+		<button class="btn btn-outline-secondary" type="button"
+			id="button-addon2" onClick="addReview('/GroupProject/Ecomm?addReview=true');loadPage();">Submit Review</button>
+	</div>
+	<div id="reviews"></div>
+
+</body>
+</html>

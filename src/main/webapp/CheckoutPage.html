@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="scripts/cartfunctions.js">;</script>
+<title>Checkout</title>
+</head>
+<body onLoad="loadaddress('/GroupProject/Ecomm?loadAddress=true');">
+	<nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="javascript:history.back()">Back To Cart</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                
+            </div>
+    </nav>
+	
+	<label id="name">Test</label>
+	<label id="phone">Test</label>
+	<label id="email">Test</label>
+	<div id="userAddress" style="display: block">
+		<label id="address">Test</label>
+		<label id="province">Test</label>
+		<label id="country">Test</label>
+		<label id="zip">Test</label>
+	</div>
+	<input type="radio" name="address" id="same" checked="checked" onClick="showNewAddress();">
+	<label for="same" >Shipping Address same as billing</label>
+	<input type="radio" name="address" id="different" onClick="showNewAddress();">
+	<label for="different">Different Shipping address </label>
+	<div   id="newAddress" style="display: none; width: 40%">
+		<span class="input-group-text">Address</span>
+		<input type="text" id="diffaddress" class="form-control" placeholder="Address" aria-label="Address">
+		<span class="input-group-text">Province</span>
+		<input type="text" id="diffprovince" class="form-control" placeholder="Province" aria-label="Province">
+		<span class="input-group-text">Country</span>
+		<input type="text" id="diffcountry" class="form-control" placeholder="Country" aria-label="Country">
+		<span class="input-group-text">Zip-Code</span>
+		<input type="text" id="diffzip" class="form-control" placeholder="Zip" aria-label="Zip">
+	</div>
+	<div style="width: 40%">
+	<span class="input-group-text" >Credit Card Number</span>
+		<input type="text" id="cardNum" class="form-control" placeholder="Credit Card Number" aria-label="Credit Card Number">
+	<span class="input-group-text">Name on Card</span>
+		<input type="text" id="creditName" class="form-control" placeholder="Full Name" aria-label="CreditName">
+	<span class="input-group-text">Security Number</span>
+		<input type="text" id="securityNumber" class="form-control" placeholder="3 Digits on the back" aria-label="Securitynumber">
+	<span class="input-group-text">Expiry Date</span>
+		<input type="text" id="expiryDate" class="form-control" placeholder="MM/YY" aria-label="ExpiryDate">
+	<br/>
+	<button class="btn btn-sml btn-primary" onClick="confirmPurchase('/GroupProject/Ecomm?confirmPurchase=true');">Confirm Payment</button>
+	</div>
+</body>
+</html>
