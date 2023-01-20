@@ -1,0 +1,138 @@
+/*DROP TABLE VisitEvent;
+DROP TABLE USERS;
+DROP TABLE Reviews;
+DROP TABLE POITEM;
+DROP TABLE PO;
+DROP TABLE ITEM;
+DROP TABLE ADDRESS;
+*/
+
+/* create Item table*/
+CREATE TABLE Item(
+bid VARCHAR(20) NOT NULL PRIMARY KEY,
+name VARCHAR(60) NOT NULL,
+description VARCHAR(60) NOT NULL,
+type VARCHAR(60) NOT NULL,
+brand VARCHAR(60) NOT NULL,
+quantity INT NOT NULL,
+price INT NOT NULL
+);
+/*insert data into item table*/
+INSERT INTO ITEM (bid, name, description, type, brand, price, quantity) VALUES ('b001', 'Little Prince', 'a book for all ages', 'book', 'Penguin', 20, 100);
+INSERT INTO ITEM (bid, name, description, type, brand, price, quantity) VALUES ('c001', 'iPad', 'a device for personal use', 'electronics', 'Apple', 500, 100);
+INSERT INTO ITEM (bid, name, description, type, brand, price, quantity) VALUES ('d001', 'Laptop', 'a device for personal use', 'electronics', 'Apple', 1500, 100);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('1', 'Stick', 'Brown and Sticky', 'stick', 'The Stick Company', 9, 50);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('2', 'WristWatch', 'Time is priceless', 'Clock', 'Timeless', 20, 80);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('3', 'Coffee Mug', 'For Coffee', 'Kitchenware', 'Kitchen Dream', 5, 100);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('4', 'Windshield Wipers', 'Easier than driving blind', 'Car Parts', 'Canadian Tire' ,60, 30);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('5', 'Rock', 'Perfect pet', 'Pets', 'Mother Nature', 20, 200);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('6', 'Scissors', 'Users also searched for Paper', 'School Supplies', 'Knife Co', 5, 20);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('7', 'Paper', 'Users did not search for Scissors','School Supplies', 'Paper Co' , 2, 100);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('8', 'Metal Straw', 'For the Turtles', 'Kitchenware', 'Kitchen Dream', 3, 100);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('9', 'Goldfish', 'Not the snack that smiles back', 'Pets', 'Mother Nature',8, 20);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('10', 'Dog Food', 'Dog consumption only', 'Pets', 'Pet Nutrition', 30, 10);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('11', 'Wireless Headphones', 'Surround Sound system, wires not needed!', 'electronics', 'Sony', 300, 70);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('12', 'GPS', 'Because sometimes you do not want to ask for directions', 'electronics', 'Over There Company', 100, 50);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('13', 'Winter Tires', 'Not for summer', 'Car Parts', 'Michelin', 250, 90);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('14', 'Pans', 'See Also Pancake mix', 'Kitchenware', 'Pan & Co', 60, 20);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('15', 'Eraser', 'Because some mistakes can be erased', 'School Supplies', 'Mistakes R Us', 2, 100);
+INSERT INTO Item (bid, name, description, type, brand, price, quantity) VALUES ('16', 'Romeo and Juliet', 'Top choice for assigned reading by every english teacher', 'book', 'Shakespeare Classics', 20, 600);
+
+
+
+
+
+CREATE TABLE USERS (
+role INT NOT NULL,
+status INT NOT NULL,
+lname VARCHAR(20) NOT NULL,
+fname VARCHAR(20) NOT NULL,
+email VARCHAR(20)NOT NULL,
+pwd VARCHAR(20)NOT NULL,
+address VARCHAR(20)NOT NULL,
+province VARCHAR(20)NOT NULL,
+country VARCHAR(20)NOT NULL,
+zip VARCHAR(20)NOT NULL,
+phone VARCHAR(20)NOT NULL,
+PRIMARY KEY(email)
+);
+
+INSERT INTO Users (role, status, lname, fname, email, pwd, address, province, country, zip, phone) VALUES (1, 0, 'Blostein', 'Ronny', 'customer@site.com', '123', '123 Sesame Street', 'ON', 'Canada', 'K2Y 5H2' ,'647-123-4567');
+INSERT INTO Users (role, status, lname, fname, email, pwd, address, province, country, zip, phone) VALUES (0, 0, 'Iafrate', 'Anthony', 'admin@site.com', '123', '123 Poppy Street', 'ON', 'Canada', 'C2N 9V8' ,'416-123-4567');
+
+/*create an address table*/
+CREATE TABLE Address (
+id INT NOT NULL,
+street VARCHAR(100) NOT NULL,
+province VARCHAR(20) NOT NULL,
+country VARCHAR(20) NOT NULL,
+zip VARCHAR(20) NOT NULL,
+phone VARCHAR(20),
+PRIMARY KEY(id)
+);
+
+/* create Purchase Order(PO) table */
+/* Purchase Order
+* lname: last name
+* fname: first name
+* id: purchase order id
+* status: status of purchase: Processed, Denied, Ordered */
+CREATE TABLE PO (
+id INT NOT NULL,
+lname VARCHAR(20) NOT NULL,
+fname VARCHAR(20) NOT NULL,
+status VARCHAR(20)NOT NULL,
+address INT NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY (address) REFERENCES Address (id)
+);
+/*
+
+/*create table Purchase Ordered Item, contains items on each order*/
+CREATE TABLE POItem (
+id INT NOT NULL,
+bid VARCHAR(20) NOT NULL,
+amount INT NOT NULL,
+price INT NOT NULL,
+PRIMARY KEY(id,bid),
+FOREIGN KEY(id) REFERENCES PO(id),
+FOREIGN KEY(bid) REFERENCES Item(bid)
+);
+
+/* visit to website
+* ipaddress: varchar
+* day: date
+* bid: unique identifier of item
+* eventtype: status of purchase
+*/
+CREATE TABLE VisitEvent (
+ipaddress varchar (20) NOT NULL,
+day varchar(8) NOT NULL,
+bid varchar(20) not null,
+eventtype varchar(20) NOT NULL,
+FOREIGN KEY(bid) REFERENCES Item(bid)
+);
+/*
+* data for table 'VisitEvent'
+*/
+INSERT INTO VisitEvent (ipaddress, day, bid, eventtype) VALUES ('1.23.4.5','12202022', 'b001', 'VIEW');
+INSERT INTO VisitEvent (ipaddress, day, bid, eventtype) VALUES ('1.23.4.5', '12242022', 'b001', 'CART');
+
+
+CREATE TABLE Reviews (
+    bid  varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    review varchar(500),
+    CONSTRAINT PK_Review PRIMARY KEY (bid,email)
+);
+INSERT INTO Reviews (bid, email, review) VALUES ('3', 'customer@site.com', 'Great Mug, holds all of my coffee and other drinks!');
+INSERT INTO Reviews (bid, email, review) VALUES ('3', 'admin@site.com', 'Alright mug, handwash since dishwasher destroys the texture');
+INSERT INTO Reviews (bid, email, review) VALUES ('6', 'customer@site.com', 'Beats paper 10/10');
+INSERT INTO Reviews (bid, email, review) VALUES ('6', 'admin@site.com', 'Got beat by a rock 0/10');
+INSERT INTO Reviews (bid, email, review) VALUES ('10', 'admin@site.com', 'Good amount of food for my dog');
+INSERT INTO Reviews (bid, email, review) VALUES ('10', 'customer@site.com', 'Tastes pretty good, my dog thought so too');
+INSERT INTO Reviews (bid, email, review) VALUES ('7', 'admin@site.com', 'Beats Rock!');
+INSERT INTO Reviews (bid, email, review) VALUES ('8', 'customer@site.com', 'Save the turtles!');
+
+
+

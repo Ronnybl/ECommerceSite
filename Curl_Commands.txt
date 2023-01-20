@@ -1,0 +1,67 @@
+Testing Register
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?register=true&fname=curl&lname=command&email=curl@command.com&pwd=123&address=123%20Street&phone=123-456&province=ON&country=Canada&zip=K2M%202R3"
+{"status":1,"email":"curl@command.com"}
+
+Testing Log-Out (after registering)
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?logout=true&email=curl@command.com"
+{"status":0}
+
+Testing Sign-In
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?signin=true&email=curl@command.com&pwd=123"
+{"status":true,"email":"curl@command.com","role":"1"}
+
+Testing Sign-In (When user doesn't exist)
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?signin=true&email=DoesNotExist@test.com&pwd=123"
+{"status":false}
+
+Adding Product to Cart
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?purchaseproduct=true&email=curl@command.com&bid=1"
+[{"bid":"1","name":"Stick","description":"Brown and Sticky","type":"stick","brand":"The Stick Company","quantity":50,"price":9},null,null,null,null,null,null,null,null,null,null]
+
+Print Reviews for Item
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?printReviews=true&bid=1"
+[{"bid":"b001","email":"admin@site.com","review":"best book ever no doubt"},
+{"bid":"10","email":"customer@site.com","review":"Tastes pretty good, my dog thought so too"},
+{"bid":"10","email":"admin@site.com","review":"Good amount of food for my dog"},
+{"bid":"11","email":"test@test.com","review":"Pretty decent"}]
+
+Retrieve Admin Stats
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?retrieveStats=true&bid=1"
+{"viewcount":2,"cartcount":0,"purchasecount":0,"totalItemSales":0}
+
+Retrieve Admin Stats on Sales
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?generalStats=true"
+{"totalQuantity":5,"totalSales":565}
+
+Retrieve Items for main page
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?loadmain=true"
+[{"bid":"11","name":"Wireless Headphones","description":"Surround Sound system, wires not needed!","type":"electronics","brand":"Sony","quantity":70,"price":300},
+{"bid":"12","name":"GPS","description":"Because sometimes you do not want to ask for directions","type":"electronics","brand":"Over There Company","quantity":50,"price":100},
+{"bid":"b001","name":"Little Prince","description":"a book for all ages","type":"book","brand":"Penguin","quantity":100,"price":20},
+{"bid":"13","name":"Winter Tires","description":"Not for summer","type":"Car Parts","brand":"Michelin","quantity":90,"price":250},
+{"bid":"c001","name":"iPad","description":"a device for personal use","type":"electronics","brand":"Apple","quantity":100,"price":500},
+{"bid":"d001","name":"Laptop","description":"a device for personal use","type":"electronics","brand":"Apple","quantity":100,"price":1500},
+{"bid":"14","name":"Pans","description":"See Also Pancake mix","type":"Kitchenware","brand":"Pan & Co","quantity":20,"price":60},
+{"bid":"15","name":"Eraser","description":"Because some mistakes can be erased","type":"School Supplies","brand":"Mistakes R Us","quantity":100,"price":2},
+{"bid":"16","name":"Romeo and Juliet","description":"Top choice for assigned reading by every english teacher","type":"book","brand":"Shakespeare Classics","quantity":600,"price":20},
+{"bid":"1","name":"Stick","description":"Brown and Sticky","type":"stick","brand":"The Stick Company","quantity":50,"price":9},
+{"bid":"2","name":"WristWatch","description":"Time is priceless","type":"Clock","brand":"Timeless","quantity":80,"price":20},
+{"bid":"3","name":"Coffee Mug","description":"For Coffee","type":"Kitchenware","brand":"Kitchen Dream","quantity":99,"price":5},
+{"bid":"4","name":"Windshield Wipers","description":"Easier than driving blind","type":"Car Parts","brand":"Canadian Tire","quantity":30,"price":60},
+{"bid":"5","name":"Rock","description":"Perfect pet","type":"Pets","brand":"Mother Nature","quantity":200,"price":20},
+{"bid":"6","name":"Scissors","description":"Users also searched for Paper","type":"School Supplies","brand":"Knife Co","quantity":20,"price":5},
+{"bid":"7","name":"Paper","description":"Users did not search for Scissors","type":"School Supplies","brand":"Paper Co","quantity":100,"price":2},
+{"bid":"8","name":"Metal Straw","description":"For the Turtles","type":"Kitchenware","brand":"Kitchen Dream","quantity":100,"price":3},
+{"bid":"9","name":"Goldfish","description":"Not the snack that smiles back","type":"Pets","brand":"Mother Nature","quantity":20,"price":8},
+{"bid":"10","name":"Dog Food","description":"Dog consumption only","type":"Pets","brand":"Pet Nutrition","quantity":10,"price":30}]
+
+Retrieve Filtered items by brand
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?filtered=true&brand=Sony"
+[{"bid":"11","name":"Wireless Headphones","description":"Surround Sound system, wires not needed!","type":"electronics","brand":"Sony","quantity":70,"price":300}]
+
+Retrieve Filtered items by type
+curl -X GET "http://localhost:8080/GroupProject/Ecomm?filtered=true&type=Pets"
+[{"bid":"5","name":"Rock","description":"Perfect pet","type":"Pets","brand":"Mother Nature","quantity":200,"price":20},
+{"bid":"9","name":"Goldfish","description":"Not the snack that smiles back","type":"Pets","brand":"Mother Nature","quantity":20,"price":8},
+{"bid":"10","name":"Dog Food","description":"Dog consumption only","type":"Pets","brand":"Pet Nutrition","quantity":10,"price":30}]
+
